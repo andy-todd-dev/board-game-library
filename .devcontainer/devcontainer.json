@@ -2,7 +2,20 @@
   "name": "Board Game Library Dev",
   "image": "mcr.microsoft.com/devcontainers/base:trixie",
   "features": {
+    "ghcr.io/lentzi90/features/tilt:0": {
+        "version": "v0.37.3"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "moby": false,
+      "dockerDashComposeVersion": "none"
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "helm": "none",
+      "minikube": "none"
+    }
   },
-  "forwardPorts": []
-
+  "mounts": [
+    "source=board-game-library-kube-config,target=/home/vscode/.kube,type=volume"
+  ],
+  "postStartCommand": "sh .devcontainer/check-kube-config.sh"
 }
